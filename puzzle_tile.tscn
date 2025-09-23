@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmg4c3ytq5o7g"]
+
+[ext_resource type="Texture2D" uid="uid://bmsqo325usvjv" path="res://assets/tile.svg" id="1_0ugm7"]
+[ext_resource type="Script" uid="uid://jb7l3l1tx64p" path="res://puzzle_tile.gd" id="1_7qxln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugm7"]
+size = Vector2(128, 128)
+
+[node name="PuzzleTile" type="Area2D"]
+script = ExtResource("1_7qxln")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_0ugm7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ugm7")
