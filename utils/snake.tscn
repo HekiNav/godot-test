@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://by43sca3img8g"]
+
+[ext_resource type="Script" uid="uid://s41xeevimo3e" path="res://utils/snake.gd" id="1_45o4o"]
+
+[node name="Snake" type="Line2D"]
+z_index = -1
+width = 128.0
+default_color = Color(0.105882354, 0.7254902, 0.42352942, 1)
+joint_mode = 2
+script = ExtResource("1_45o4o")

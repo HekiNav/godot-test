@@ -1,10 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmg4c3ytq5o7g"]
+[gd_scene load_steps=7 format=3 uid="uid://cmg4c3ytq5o7g"]
 
-[ext_resource type="Texture2D" uid="uid://bmsqo325usvjv" path="res://assets/tile.svg" id="1_0ugm7"]
 [ext_resource type="Script" uid="uid://jb7l3l1tx64p" path="res://puzzle_tile.gd" id="1_7qxln"]
+[ext_resource type="Texture2D" uid="uid://djafuq0syovrj" path="res://assets/tile_default.svg" id="2_ja016"]
+[ext_resource type="Texture2D" uid="uid://n4ji3jxbkoqj" path="res://assets/tile_powered.svg" id="3_cnic5"]
+[ext_resource type="Texture2D" uid="uid://cj31npiogscpu" path="res://assets/tile_unpowered.svg" id="4_oq3mr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugm7"]
 size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jekb2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ja016")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cnic5")
+}],
+"loop": true,
+"name": &"powered",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_oq3mr")
+}],
+"loop": true,
+"name": &"unpowered",
+"speed": 5.0
+}]
 
 [node name="PuzzleTile" type="Area2D"]
 script = ExtResource("1_7qxln")
@@ -13,5 +50,28 @@ script = ExtResource("1_7qxln")
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_0ugm7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_0ugm7")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_jekb2")
+animation = &"none"
+frame_progress = 0.7993025
+
+[node name="IdLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+z_index = 1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.79607844, 0.7176471, 0.42352942, 1)
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="draw" from="." to="." method="_on_draw"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="draw" from="Sprite" to="." method="_on_sprite_draw"]

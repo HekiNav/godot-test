@@ -1,0 +1,28 @@
+{
+	"levels": [
+		{
+			"size": 5,
+			"data": {
+				"0":{
+					"1":{
+						"type":"terminal",
+						"direction":"output",
+						"id":"5V"
+					}
+				},
+				"2":{
+					"2":{
+						"type":"gap"
+					}
+				},
+				"4": {
+					"3": {
+						"type":"terminal",
+						"direction":"input",
+						"id":"5V"
+					}
+				}
+			}
+		}
+	]
+}

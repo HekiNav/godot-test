@@ -15,3 +15,5 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(960, 640)
 shape = SubResource("RectangleShape2D_p0ybc")
+
+[connection signal="input_event" from="BoardConstraints" to="." method="_on_board_constraints_input_event"]
