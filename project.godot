@@ -107,12 +107,6 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/colorpicker_presets/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
 
-[file_customization]
-
-folder_colors={
-"res://archive/": "gray"
-}
-
 [input]
 
 move_left={
