@@ -1,8 +1,7 @@
 extends Area2D
 var data = {}
 
-var mouse_over = false
-var powered = false
+var powered = null
 var can_draw = true
 var source = false
 
@@ -28,11 +27,11 @@ func _ready():
 			"terminal":
 				if data.direction == "output":
 					%Sprite.play("powered")
-					powered = true
+					powered = data.id
 					source = true
 				else:
 					%Sprite.play("unpowered")
-					powered = false
+					powered = null
 					
 				pass
 			"gap":
@@ -44,14 +43,24 @@ func _ready():
 				pass
 	else:
 		%Sprite.play("default")
-func spread_power():
-	powered = true
+func spread_power(id):
+	powered = id
 	var overlaps = get_overlapping_areas().filter(func (item):
 		return !item.powered
 	)
-	print(self,"tile", overlaps)
+	#print("tile",self, overlaps)
 	for connected_item in overlaps:
-		connected_item.spread_power()
-func _on_sprite_draw() -> void:
-	if mouse_over :
-		%Sprite.draw_circle(Vector2(0,0),size().x,Color.from_rgba8(255,255,255,100))
+		connected_item.spread_power(id)
+func can_draw_power(power):
+	if data.has("type") && data.type == "terminal" && data.direction == "input":
+		return can_draw && (data.id == power || power == null)
+	return can_draw
+func fulfilled():
+	if data.has("type"):
+		match data.type:
+			"terminal":
+				return data.direction == "output" || powered == data.id
+			_:
+				return true
+	else:
+		return true

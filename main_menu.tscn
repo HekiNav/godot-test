@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://q6mw8aubwsqh"]
+
+[ext_resource type="Script" uid="uid://w336qrdmewiq" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_06t4h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1280.0
+color = Color(0.05490196, 0.28627452, 0.18431373, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 51.0
+offset_top = 62.0
+offset_right = 1163.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.8235294, 0.7529412, 0.47058824, 1)
+theme_override_font_sizes/font_size = 100
+text = "PCB PUZZLE GAME v0.1"
+
+[node name="Play" type="Button" parent="."]
+offset_left = 102.0
+offset_top = 831.0
+offset_right = 211.0
+offset_bottom = 908.0
+theme_override_colors/font_color = Color(0.8235294, 0.7529412, 0.47058824, 1)
+theme_override_font_sizes/font_size = 50
+text = "Play"
+flat = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]

@@ -75,12 +75,12 @@ Settings/Show_Tooltips=true
 [application]
 
 config/name="pcb-puzzle"
-run/main_scene="uid://c63cg86hqnl56"
+run/main_scene="uid://q6mw8aubwsqh"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://archive/icon.png"
-config/size/viewport_width=1152
+config/icon="uid://cvxd1kfcujnfc"
 config/size/viewport_height=648
 config/main_scene=""
+config/size/viewport_width=1152
 
 [audio]
 
@@ -151,3 +151,5 @@ erase_trace={
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.05490196, 0.28627452, 0.18431373, 1)

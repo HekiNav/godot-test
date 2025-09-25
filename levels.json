@@ -1,25 +1,145 @@
 {
 	"levels": [
 		{
-			"size": 5,
+			"size": 3,
 			"data": {
-				"0":{
-					"1":{
-						"type":"terminal",
-						"direction":"output",
-						"id":"5V"
+				"0": {
+					"1": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "+5V"
 					}
 				},
-				"2":{
-					"2":{
-						"type":"gap"
+				"2": {
+					"1": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "+5V"
+					}
+				}
+			}
+		},
+		{
+			"size": 5,
+			"data": {
+				"0": {
+					"1": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "+5V"
+					}
+				},
+				"1": {
+					"0": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "GND"
+					}
+				},
+				"2": {
+					"2": {
+						"type": "gap"
+					},
+					"3": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "GND"
 					}
 				},
 				"4": {
 					"3": {
-						"type":"terminal",
-						"direction":"input",
-						"id":"5V"
+						"type": "terminal",
+						"direction": "input",
+						"id": "+5V"
+					}
+				}
+			}
+		},
+		{
+			"size": 8,
+			"data": {
+				"0": {
+					"0": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "VBUS"
+					},
+					"1": {
+						"type": "gap"
+					},
+					"2": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "VBUS"
+					},
+					"3": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "DIN"
+					},
+					"4": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "DOUT"
+					},
+					"5": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "GND"
+					},
+					"6": {
+						"type": "gap"
+					},
+					"7": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "GND"
+					}
+				},
+				"1": {
+					"1": {
+						"type": "gap"
+					},
+					"6": {
+						"type": "gap"
+					}
+				},
+				"2": {
+					"1": {
+						"type": "gap"
+					},
+					"6": {
+						"type": "gap"
+					}
+				},
+				"4": {
+					"2": {
+						"type": "gap"
+					},
+					"5": {
+						"type": "gap"
+					}
+				},
+				"5": {
+					"2": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "VBUS"
+					},
+					"3": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "DIN"
+					},
+					"4": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "DOUT"
+					},
+					"5": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "GND"
 					}
 				}
 			}
