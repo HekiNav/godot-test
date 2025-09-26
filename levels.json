@@ -30,17 +30,37 @@
 			"size": 3,
 			"data": {
 				"0": {
+					"0": {
+						"type":"gap"
+					},
 					"1": {
 						"type": "terminal",
 						"direction": "output",
 						"id": "+5V"
+					},
+					"2": {
+						"type":"gap"
+					}
+				},
+				"1": {
+					"0": {
+						"type":"gap"
+					},
+					"2": {
+						"type":"gap"
 					}
 				},
 				"2": {
+					"0": {
+						"type":"gap"
+					},
 					"1": {
 						"type": "terminal",
 						"direction": "input",
 						"id": "+5V"
+					},
+					"2": {
+						"type":"gap"
 					}
 				}
 			}
@@ -50,14 +70,19 @@
 			"data": {
 				"0": {
 					"0": {
-						"type": "terminal",
-						"direction": "input",
-						"id": "GND"
+						"type":"gap"
 					},
 					"1": {
 						"type": "terminal",
 						"direction": "output",
 						"id": "+5V"
+					}
+				},
+				"1":{
+					"0": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "GND"
 					}
 				},
 				"2": {
@@ -109,17 +134,29 @@
 			],
 			"data": {
 				"0": {
+					"0": {
+						"type":"gap"
+					},
 					"1": {
 						"type": "terminal",
 						"direction": "output",
 						"id": "+5V"
+					},
+					"5": {
+						"type":"gap"
 					}
 				},
 				"5": {
+					"0": {
+						"type":"gap"
+					},
 					"4": {
 						"type": "terminal",
 						"direction": "output",
 						"id": "GND"
+					},
+					"5": {
+						"type":"gap"
 					}
 				}
 			}

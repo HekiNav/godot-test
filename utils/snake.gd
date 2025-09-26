@@ -37,7 +37,7 @@ func update():
 			segment.debug_color = Color.RED
 			add_child(segment)
 func _draw() -> void:
-	if path.size() == 1:
+	if path.size() == 1 && path[0] >= 0:
 		draw_circle(%Line.points[0],%Line.width*0.5,%Line.default_color)
 func append(point):
 	path.append(point)
