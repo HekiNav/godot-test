@@ -60,10 +60,10 @@ func reload():
 			new_component.xoffset = lib_ref.xoffset
 			new_component.yoffset = lib_ref.yoffset
 			new_component.tiles = lib_ref.tiles
-			var x = 1 + (lib_ref.width - 1) * gap
-			new_component.scale = board_scale * 0.5 * x
+			var x = %BoardConstraintsShape.shape.extents / (tile.size()*(1+gap)*Vector2(size/(size+lib_ref.width-1),size/(size+lib_ref.height-1))) / size * 2
+			new_component.scale = board_scale * 0.5
 			print(x)
-			new_component.global_position = board_origin + tile_spacing * Vector2(0+lib_ref.xoffset,0+lib_ref.yoffset)
+			new_component.global_position = board_origin + tile_spacing * Vector2(com.location[0],com.location[1]) + tile_size * Vector2(lib_ref.width * 0.5 + lib_ref.xoffset, lib_ref.height * 0.5 + lib_ref.yoffset)
 			
 			add_child(new_component)
 			components.append(new_component)
@@ -87,6 +87,9 @@ func _on_board_constraints_input_event(_viewport: Node, event: InputEvent, _shap
 			var val = tile.has_point(event.position) if tile  else false
 			return val
 	)
+	if mouse_over_component(event):
+		print("COMPONENT")
+		pass
 	if event.is_action("draw_trace"):
 		if event.pressed:
 			if isFree(i, null):
@@ -97,7 +100,7 @@ func _on_board_constraints_input_event(_viewport: Node, event: InputEvent, _shap
 			checkConnections()
 	elif event.is_action("erase_trace"):
 		if event.pressed:
-			pass
+			erase(i)
 		else:
 			checkConnections()
 		pass
@@ -112,15 +115,22 @@ func _on_board_constraints_input_event(_viewport: Node, event: InputEvent, _shap
 			):
 				temp_snake.append(i)
 		elif event.button_mask == 2:
-			if i > 0:
-				for snake in snakes:
-					if snake:
-						var new_path = snake.remove(i)
-						if new_path:
-							createSnake(new_path)
+			erase(i)
 		if event.button_mask == 0 && temp_snake:
 			snakes.append(temp_snake)
 			temp_snake = null
+func erase(i):
+	if i > 0:
+		for snake in snakes:
+			if snake:
+				var new_path = snake.remove(i)
+				if new_path:
+					createSnake(new_path)
+func mouse_over_component(event):
+	var comps = components.filter(func(c):
+		return c.has_mouse(event.position)
+	)
+	print(comps)
 func deleteTempSnake():
 	temp_snake.queue_free()
 func isFree(tile, current_power):
