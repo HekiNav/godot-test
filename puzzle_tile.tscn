@@ -1,18 +1,24 @@
 [gd_scene load_steps=7 format=3 uid="uid://cmg4c3ytq5o7g"]
 
 [ext_resource type="Script" uid="uid://jb7l3l1tx64p" path="res://puzzle_tile.gd" id="1_7qxln"]
-[ext_resource type="Texture2D" uid="uid://djafuq0syovrj" path="res://assets/tile_default.svg" id="2_ja016"]
-[ext_resource type="Texture2D" uid="uid://n4ji3jxbkoqj" path="res://assets/tile_powered.svg" id="3_cnic5"]
-[ext_resource type="Texture2D" uid="uid://cj31npiogscpu" path="res://assets/tile_unpowered.svg" id="4_oq3mr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ugm7"]
 size = Vector2(128, 128)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jekb2"]
+load_path = "res://.godot/imported/tile_default.svg-6b62d2bcbbe0483b67ea1989027f2a79.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7qxln"]
+load_path = "res://.godot/imported/tile_powered.svg-f0cb9008a7491fdd30f965ba5dc07f20.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42vx8"]
+load_path = "res://.godot/imported/tile_unpowered.svg-35acd04c76c26221681f1839be7538b2.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jekb2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ja016")
+"texture": SubResource("CompressedTexture2D_jekb2")
 }],
 "loop": true,
 "name": &"default",
@@ -28,7 +34,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_cnic5")
+"texture": SubResource("CompressedTexture2D_7qxln")
 }],
 "loop": true,
 "name": &"powered",
@@ -36,7 +42,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_oq3mr")
+"texture": SubResource("CompressedTexture2D_42vx8")
 }],
 "loop": true,
 "name": &"unpowered",
@@ -68,6 +74,20 @@ offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 1
 theme_override_colors/default_color = Color(0.79607844, 0.7176471, 0.42352942, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IdLabelBlack" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+z_index = 1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 0.6666667)
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 horizontal_alignment = 1

@@ -78,8 +78,6 @@ config/name="pcb-puzzle"
 run/main_scene="uid://q6mw8aubwsqh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://cvxd1kfcujnfc"
-config/size/viewport_width=1152
-config/size/viewport_height=648
 config/main_scene=""
 
 [audio]
@@ -90,8 +88,8 @@ buses/default_bus_layout="res://archive/default_bus_layout.tres"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1280
-window/size/window_width_override=960
-window/size/window_height_override=640
+window/size/window_width_override=1440
+window/size/window_height_override=960
 window/stretch/mode="viewport"
 
 [dotnet]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://q6mw8aubwsqh"]
+[gd_scene load_steps=3 format=3 uid="uid://q6mw8aubwsqh"]
 
-[ext_resource type="Script" uid="uid://w336qrdmewiq" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://c0kaicr1ro22w" path="res://assets/tile_play.svg" id="2_7vrkn"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_06t4h")
@@ -26,7 +27,38 @@ offset_right = 211.0
 offset_bottom = 908.0
 theme_override_colors/font_color = Color(0.8235294, 0.7529412, 0.47058824, 1)
 theme_override_font_sizes/font_size = 50
-text = "Play"
+text = " Play"
+icon = ExtResource("2_7vrkn")
 flat = true
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 264.0
+offset_right = 1176.0
+offset_bottom = 401.0
+theme_override_colors/font_color = Color(0.8235294, 0.7529412, 0.47058824, 1)
+theme_override_font_sizes/font_size = 50
+text = "INSTRUCTIONS:
+Draw traces with LMB
+Erase traces with RMB
+Move components with LMB (on level 3)
+
+There are 3 levels.
+IMPORTANT! This isn't a complete game yet"
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(1536, 0, 1600, 64, 1664, 128, 1728, 192, 1792, 256, 1792, 832, 1600, 1024, 1600, 1280)
+width = 64.0
+default_color = Color(0.007843138, 0.18431373, 0.105882354, 1)
+begin_cap_mode = 1
+end_cap_mode = 1
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2(-128, 0)
+points = PackedVector2Array(1536, 0, 1600, 64, 1664, 128, 1728, 192, 1832, 296, 1832, 792, 1640, 984, 1536, 1088, 1472, 1152, 128, 1152)
+width = 64.0
+default_color = Color(0.007843138, 0.18431373, 0.105882354, 1)
+begin_cap_mode = 1
+end_cap_mode = 1
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]

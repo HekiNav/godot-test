@@ -14,25 +14,28 @@ func has_point(point):
 func set_data(new_data):
 	data = new_data
 func _physics_process(_delta: float) -> void:
-	if data && data.type == "terminal":
-		if powered:
-			%Sprite.play("powered")
-		else:
-			%Sprite.play("unpowered")
-func _ready():
+	update()
+func update():
 	if data.has("id"):
-		%IdLabel.append_text(data.id)
+		if data.has("black"):
+			%IdLabelBlack.text = data.id
+			%IdLabel.text = ""
+		else:
+			%IdLabel.text = data.id
+			%IdLabelBlack.text = ""
+	else:
+		%IdLabelBlack.text = ""
+		%IdLabel.text = ""
 	if data.has("type"):
 		match data.type:
 			"terminal":
 				if data.direction == "output":
-					%Sprite.play("powered")
-					powered = data.id
 					source = true
+					powered = data.id
+				if powered == data.id || source:
+					%Sprite.play("powered")
 				else:
 					%Sprite.play("unpowered")
-					powered = null
-					
 				pass
 			"gap":
 				%Sprite.play("none")
@@ -48,7 +51,7 @@ func spread_power(id):
 	var overlaps = get_overlapping_areas().filter(func (item):
 		return !item.powered
 	)
-	#print("tile",self, overlaps)
+	print("tile",self, overlaps, powered)
 	for connected_item in overlaps:
 		connected_item.spread_power(id)
 func can_draw_power(power):

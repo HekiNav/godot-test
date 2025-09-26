@@ -1,7 +1,7 @@
 extends Node2D
 
 var size = 1 # width and height of board
-var gap = 0.1 # percent relative to size
+var gap = 0.125 # percent relative to size
 var data = {}
 var component_data = []
 var component_library = []
@@ -10,6 +10,7 @@ var snakes = []
 var components = []
 
 var temp_snake
+var moving_component = -1
 
 signal win
 
@@ -31,6 +32,8 @@ func _ready() -> void:
 func reload():
 	for tile in tiles:
 		tile.queue_free()
+	for com in components:
+		com.queue_free()
 	for snake in snakes:
 		if snake:
 			snake.queue_free()
@@ -47,27 +50,6 @@ func reload():
 	tile_spacing = board_scale * (tile.size() * Vector2(1+gap,1+gap))
 	tile_size = tile.size() * board_scale
 	
-	if component_data:
-		for com in component_data:
-			var lib_ref = component_library.get(component_library.find_custom(func (item):
-				return item.id == com.id
-			))
-			var new_component = component.duplicate()
-			new_component.sprite_unpowered = lib_ref.unpowered
-			new_component.sprite_powered = lib_ref.powered
-			new_component.width = lib_ref.width
-			new_component.height = lib_ref.height
-			new_component.xoffset = lib_ref.xoffset
-			new_component.yoffset = lib_ref.yoffset
-			new_component.tiles = lib_ref.tiles
-			var x = %BoardConstraintsShape.shape.extents / (tile.size()*(1+gap)*Vector2(size/(size+lib_ref.width-1),size/(size+lib_ref.height-1))) / size * 2
-			new_component.scale = board_scale * 0.5
-			print(x)
-			new_component.global_position = board_origin + tile_spacing * Vector2(com.location[0],com.location[1]) + tile_size * Vector2(lib_ref.width * 0.5 + lib_ref.xoffset, lib_ref.height * 0.5 + lib_ref.yoffset)
-			
-			add_child(new_component)
-			components.append(new_component)
-	
 	
 	for x in size:
 		var rowData = data[str(int(x))] if data.has(str(int(x))) else {}
@@ -81,23 +63,58 @@ func reload():
 			%BoardConstraints.add_child(new_tile)
 			new_tile.global_position = board_origin + (new_tile.size() * board_scale * Vector2(x*gap_x+0.5,y*gap_y+0.5))
 			tiles.append(new_tile)
+	if component_data:
+		for com in component_data:
+			var lib_ref = component_library.get(component_library.find_custom(func (item):
+				return item.id == com.id
+			))
+			var new_component = component.duplicate()
+			new_component.sprite_unpowered = lib_ref.unpowered
+			new_component.sprite_powered = lib_ref.powered
+			new_component.width = lib_ref.width
+			new_component.height = lib_ref.height
+			new_component.xoffset = lib_ref.xoffset
+			new_component.yoffset = lib_ref.yoffset
+			new_component.tiles = lib_ref.tiles
+			new_component.tile_spacing = tile_size
+			new_component.board = self
+			new_component.scale = %BoardConstraintsShape.shape.extents / (tile.size()*(Vector2(1,1)+gap*(Vector2(size-(lib_ref.width-1),size-(lib_ref.height-1))/size))) / size
+			var loc = Vector2(com.location[0],com.location[1])
+			new_component.offset = tile_size * Vector2(lib_ref.width * 1.0625 * 0.5 + lib_ref.xoffset, lib_ref.height * 0.5 + lib_ref.yoffset)
+			new_component.global_position = board_origin + tile_spacing * loc + new_component.offset
+			new_component.location = loc
+			add_child(new_component)
+			components.append(new_component)
 func _on_board_constraints_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	var i = tiles.find_custom(
 		func (tile):
 			var val = tile.has_point(event.position) if tile  else false
 			return val
 	)
-	if mouse_over_component(event):
-		print("COMPONENT")
-		pass
+	var comp_i = mouse_over_component(event)
 	if event.is_action("draw_trace"):
 		if event.pressed:
-			if isFree(i, null):
+			if comp_i >= 0:
+				components[comp_i].clear_tiles()
+				moving_component = comp_i
+				checkConnections()
+				return
+			elif isFree(i, null):
 				createSnake([i])
-		elif temp_snake:
-			snakes.append(temp_snake)
-			temp_snake = null
-			checkConnections()
+		else:
+			if moving_component >= 0:
+				var xy = Vector2((event.position - board_origin) / tile_spacing).floor()
+				var com = components[moving_component]
+				com.global_position = board_origin + tile_spacing * xy + com.offset
+				moving_component = -1
+				components[comp_i].location = xy
+				components[comp_i].set_tiles()
+				checkConnections()
+				return
+			elif temp_snake:
+				snakes.append(temp_snake)
+				temp_snake = null
+				checkConnections()
 	elif event.is_action("erase_trace"):
 		if event.pressed:
 			erase(i)
@@ -105,7 +122,9 @@ func _on_board_constraints_input_event(_viewport: Node, event: InputEvent, _shap
 			checkConnections()
 		pass
 	else:
-		if event.button_mask == 1:
+		if moving_component >= 0:
+			components[moving_component].global_position = event.position
+		elif event.button_mask == 1:
 			var last_tile = temp_snake.path.back() if temp_snake else -1
 			var diff = abs(last_tile-i) if last_tile >= 0 else 0
 			if (i >= 0 && 
@@ -127,10 +146,15 @@ func erase(i):
 				if new_path:
 					createSnake(new_path)
 func mouse_over_component(event):
-	var comps = components.filter(func(c):
+	if temp_snake:
+		return -1
+	return components.find_custom(func(c):
 		return c.has_mouse(event.position)
 	)
-	print(comps)
+func set_tile(tile_data, index):
+	if index > tiles.size():
+		return
+	tiles[index].set_data(tile_data)
 func deleteTempSnake():
 	temp_snake.queue_free()
 func isFree(tile, current_power):
@@ -166,7 +190,7 @@ func checkWin():
 	var result = tiles.all(func (tile):
 		return tile.fulfilled()
 	)
-	if result:
+	if result && moving_component < 0:
 		win.emit()
 
 func createSnake(snake_tiles: Array):

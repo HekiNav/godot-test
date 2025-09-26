@@ -58,6 +58,6 @@ func spread_power(id):
 	var overlaps = get_overlapping_areas().filter(func (item):
 		return !item.powered
 	)
-	#print("snake",self,  overlaps)
+	print("snake",self,  overlaps)
 	for connected_item in overlaps:
 		connected_item.spread_power(id)

@@ -3,7 +3,7 @@
 		{
 			"id": "led_th",
 			"powered": "res://assets/tile_basic_th_led_powered.svg",
-			"unpowered": "res://assets/tile_basic_th_led_powered.svg",
+			"unpowered": "res://assets/tile_basic_th_led_unpowered.svg",
 			"width": 2,
 			"height": 2,
 			"xoffset": 0,
@@ -17,7 +17,7 @@
 					},
 					{
 						"type": "terminal",
-						"direction": "output",
+						"direction": "input",
 						"id": "GND"
 					}
 				],
@@ -25,29 +25,100 @@
 			]
 		}
 	],
-	
 	"levels": [
-		
+		{
+			"size": 3,
+			"data": {
+				"0": {
+					"1": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "+5V"
+					}
+				},
+				"2": {
+					"1": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "+5V"
+					}
+				}
+			}
+		},
+		{
+			"size": 5,
+			"data": {
+				"0": {
+					"0": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "GND"
+					},
+					"1": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "+5V"
+					}
+				},
+				"2": {
+					"1": {
+						"type": "terminal",
+						"direction": "input",
+						"id": "+5V"
+					},
+					"2": {
+						"type": "gap"
+					}
+				},
+				"3": {
+					"0":{
+						"type": "terminal",
+						"direction": "input",
+						"id": "+5V"
+					},
+					"1":{
+						"type": "terminal",
+						"direction": "input",
+						"id": "GND"
+					},
+					"3": {
+						"type": "terminal",
+						"direction": "output",
+						"id": "GND"
+					}
+				}
+			}
+		},
 		{
 			"size": 6,
 			"components": [
 				{
-					"id":"led_th",
-					"location": [2,3]
+					"id": "led_th",
+					"location": [
+						2,
+						1
+					]
+				},
+				{
+					"id": "led_th",
+					"location": [
+						2,
+						4
+					]
 				}
 			],
 			"data": {
 				"0": {
-					"3": {
+					"1": {
 						"type": "terminal",
 						"direction": "output",
 						"id": "+5V"
 					}
 				},
 				"5": {
-					"3": {
+					"4": {
 						"type": "terminal",
-						"direction": "input",
+						"direction": "output",
 						"id": "GND"
 					}
 				}

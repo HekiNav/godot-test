@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://beo03imvmv0qo"]
+[gd_scene load_steps=5 format=3 uid="uid://beo03imvmv0qo"]
 
 [ext_resource type="Script" uid="uid://x623al0y5oa6" path="res://component.gd" id="1_vwh44"]
 
@@ -17,6 +17,8 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwh44"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwh44"]
+
 [node name="Component" type="Area2D"]
 script = ExtResource("1_vwh44")
 
@@ -29,3 +31,7 @@ animation = &"powered"
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_vwh44")
 debug_color = Color(0.9660477, 0, 0.48590398, 0.41960785)
+
+[node name="MouseCollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_vwh44")
