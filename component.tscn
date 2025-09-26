@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://beo03imvmv0qo"]
+
+[ext_resource type="Script" uid="uid://x623al0y5oa6" path="res://component.gd" id="1_vwh44"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vwh44"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"powered",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"unpowered",
+"speed": 5.0
+}]
+
+[node name="Component" type="Node2D"]
+script = ExtResource("1_vwh44")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_vwh44")
+animation = &"powered"

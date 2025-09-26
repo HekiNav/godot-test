@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ct1t2w3akyf4k"]
+[gd_scene load_steps=0 format=3 uid="uid://ct1t2w3akyf4k"]
 
 [node name="WinScreen" type="Control"]
 z_index = 100

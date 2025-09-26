@@ -78,9 +78,9 @@ config/name="pcb-puzzle"
 run/main_scene="uid://q6mw8aubwsqh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://cvxd1kfcujnfc"
+config/size/viewport_width=1152
 config/size/viewport_height=648
 config/main_scene=""
-config/size/viewport_width=1152
 
 [audio]
 

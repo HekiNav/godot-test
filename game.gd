@@ -10,12 +10,15 @@ func _ready():
 	var board = BOARD.instantiate()
 	board.size = json.levels[level_index].size
 	board.data = json.levels[level_index].data
+	board.component_library = json.components
+	board.component_data = json.levels[level_index].components if json.levels[level_index].has("components") else []
 	add_child(board)
 	board.connect("win",func():
 		level_index += 1
 		if level_index < json.levels.size():
 			board.size = json.levels[level_index].size
 			board.data = json.levels[level_index].data
+			board.component_data = json.levels[level_index].components if json.levels[level_index].has("components") else []
 			board.reload()
 		else:
 			board.size = 0
@@ -24,7 +27,6 @@ func _ready():
 			var win_screen = WIN_SCREEN.instantiate()
 			add_child(win_screen)
 	)
-	
 func get_json_file_content(filePath):
 	var file = FileAccess.open(filePath, FileAccess.READ)
 	var content = file.get_as_text()
